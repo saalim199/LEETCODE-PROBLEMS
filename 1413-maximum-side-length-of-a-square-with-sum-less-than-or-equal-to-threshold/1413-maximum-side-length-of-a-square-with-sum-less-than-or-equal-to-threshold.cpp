@@ -2,10 +2,10 @@ class Solution {
 public:
     bool cal(vector<vector<int>> &mat,int i1,int j1,int i2,int j2,int s){
         int sum=0;
-        if(((i1-1)<0) && ((j1-1)>=0)) sum=preSum[i2][j2]-preSum[i2][j1-1];
-        else if(((i1-1)<0) && ((j1-1)<0)) sum=preSum[i2][j2];
-        else if(((i1-1)>=0) && ((j1-1)<0)) sum=preSum[i2][j2]-preSum[i1-1][j2];
-        else sum=preSum[i2][j2]-preSum[i1-1][j2]-preSum[i2][j1-1]+preSum[i1-1][j1-1];
+        if(((i1-1)<0) && ((j1-1)>=0)) sum=mat[i2][j2]-mat[i2][j1-1];
+        else if(((i1-1)<0) && ((j1-1)<0)) sum=mat[i2][j2];
+        else if(((i1-1)>=0) && ((j1-1)<0)) sum=mat[i2][j2]-mat[i1-1][j2];
+        else sum=mat[i2][j2]-mat[i1-1][j2]-mat[i2][j1-1]+mat[i1-1][j1-1];
         if(sum<=s) return 1;
         else return 0;
     }
