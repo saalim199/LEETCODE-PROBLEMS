@@ -1,5 +1,6 @@
 class Solution {
 public:
+    ///RECURSIVE SOLUTION
     void rec(int i,int j,vector<vector<int>>& image,int old_color,int new_color){
         if(i<0 || j<0 || i>=image.size() || j>=image[0].size()
          || image[i][j]!=old_color || image[i][j]==new_color){
@@ -36,7 +37,6 @@ public:
         // }
 
         /// RECURSIVE SOLUTION
-
         rec(sr,sc,image,image[sr][sc],color);
         return image;
     }
