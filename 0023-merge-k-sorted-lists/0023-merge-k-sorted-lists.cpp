@@ -29,19 +29,23 @@ public:
             return h1;
         }
     }
-    // ListNode* merge(vector<ListNode*>& lists,int start,int end){
-    //     if(start>end) return null;
-    //     if(start==end) return lists[end];
-
-    // }
+    ListNode* merge(vector<ListNode*>& lists,int start,int end){
+        if(start>end) return NULL;
+        if(start==end) return lists[end];
+        int mid=(start+end)/2;
+        ListNode *l1=merge(lists,start,mid);
+        ListNode *l2=merge(lists,mid+1,end);
+        return solve(l1,l2);
+    }
 
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if(lists.size()==0) return NULL;
         if(lists.size()==1) return lists[0];
-        ListNode *head=solve(lists[0],lists[1]);
-        for(int i=2;i<lists.size();i++)
-            head=solve(head,lists[i]);
-        return head;
+        // ListNode *head=solve(lists[0],lists[1]);
+        // for(int i=2;i<lists.size();i++)
+        //     head=solve(head,lists[i]);
+        // return head;
+        return merge(lists,0,lists.size()-1);
     }
 
 };
