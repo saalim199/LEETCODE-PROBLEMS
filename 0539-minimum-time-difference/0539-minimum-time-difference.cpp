@@ -1,33 +1,22 @@
 class Solution {
 public:
-    static bool compareTimes(const std::string& a, const std::string& b) {
-        return a < b;
-    }
     int findMinDifference(vector<string>& tp) {
-        sort(tp.begin(), tp.end(), compareTimes);
-        int mini = INT_MAX;
-        for (int i = 0; i < tp.size()-1; i++) {
-            string hrs1 = (tp[i].substr(0, 2));
-            string mins1 = (tp[i].substr(3));
-            string hrs2 = (tp[i + 1].substr(0, 2));
-            string mins2 = (tp[i + 1].substr(3));
-            int hrsdiff = stoi(hrs2) - stoi(hrs1);
-            int minsdiff = stoi(mins2) - stoi(mins1);
-            int diff = (hrsdiff * 60) + minsdiff;
-            mini = min(mini, diff);
+        int n=tp.size();
+        vector<int> mins;
+        for(int i=0;i<n;i++){
+            int h=stoi(tp[i].substr(0,3));
+            int m=stoi(tp[i].substr(3));
+            mins.push_back(h*60+m);
         }
-        for(auto it:tp){
+        sort(mins.begin(),mins.end());
+        int mini=INT_MAX;
+        for(int i=0;i<n-1;i++){
+            mini=min(mini,mins[i+1]-mins[i]);
+        }
+        for(auto it:mins){
             cout<<it<<endl;
         }
-        int n=tp.size();
-        int hrs1=stoi(tp[0].substr(0,2));
-        int mins1=stoi(tp[0].substr(3));
-        int hrs2=stoi(tp[n-1].substr(0,2));
-        int mins2=stoi(tp[n-1].substr(3));
-        int hrsdiff=abs(hrs1-hrs2);
-        int minsdiff=abs(mins1-mins2);
-        int diff=(hrsdiff*60)+minsdiff;
-        mini=min(mini,24*60-diff);
+        mini=min(mini,24*60-mins.back()+mins.front());
         return mini;
     }
 };
