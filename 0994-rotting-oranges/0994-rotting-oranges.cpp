@@ -1,37 +1,52 @@
+/*
+[2,1,1]
+
+[1,1,0]
+
+[0,1,1]
+*/
+
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        int n=grid.size();
-        int m=grid[0].size();
-        queue<pair<pair<int,int>,int>> q;
-        int cnt=0;
+        queue<pair<int,int>> q;
+        int totalOranges=0;
+        int n=grid.size(), m=grid[0].size();
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if(grid[i][j]==2) q.push({{i,j},0});
-                if(grid[i][j]==1) cnt++;
+                if(grid[i][j]!=0) totalOranges++;
+                if(grid[i][j]==2) q.push({i,j}); 
             }
         }
-        int delr[4]={-1,0,1,0};
-        int delc[4]={0,1,0,-1};
-        int t=0;
-        int cnt2=0;
+        int time=0;
+        bool first=1;
+        int countOranges=0;
+        int rows[4]={1,-1,0,0};
+        int cols[4]={0,0,1,-1};
         while(!q.empty()){
-            int x=q.front().first.first;
-            int y=q.front().first.second;
-            int tm=q.front().second;
-            q.pop();
-            t=max(t,tm);
-            for(int i=0;i<4;i++){
-                int row=x+delr[i];
-                int col=y+delc[i];
-                if(row>=0 && col>=0 && row<n && col<m && grid[row][col]==1){
-                    grid[row][col]=2;
-                    cnt2++;
-                    q.push({{row,col},tm+1});
+            int queueSize=q.size();
+            countOranges+=queueSize;
+            if(first) {
+                first=0;
+            }else{
+                time++;
+            }
+            for(int l=0;l<queueSize;l++){
+                auto [i,j] = q.front();
+                q.pop();
+                for(int k=0;k<4;k++){
+                    int row=i+rows[k];
+                    int col=j+cols[k];
+                    if(row>=0 && row<n && col>=0 && col<m && grid[row][col]==1){
+                        cout<<row<<" "<<col<<endl;
+                        grid[row][col]=2;
+                        q.push({row,col});
+                    }
                 }
             }
         }
-        // cout<<cnt<<" "<<cnt2<<endl;
-        return cnt2==cnt ? t : -1;
+        cout<<countOranges<<" "<<totalOranges<<endl;
+        if(totalOranges==countOranges) return time;
+        return -1;
     }
 };
