@@ -12,6 +12,7 @@
 class Solution {
 public:
     void makeTree(TreeNode* &root, vector<int>& preorder, vector<int>& inorder){
+        if(preorder.empty() || inorder.empty()) return;
         TreeNode* node=new TreeNode();
         node->val=preorder[0];
         root=node;
