@@ -11,29 +11,17 @@
  */
 class Solution {
 public:
+    void traverse(TreeNode *root, vector<int> &pre){
+        if(!root) return;
+        traverse(root->left,pre);
+        pre.push_back(root->val);
+        traverse(root->right,pre);
+    }
     bool isValidBST(TreeNode* root) {
-        if(root==NULL) return true;
-        queue<pair<TreeNode*,pair<long long int,long long int>>> q;
-        q.push({root,{LLONG_MIN,LLONG_MAX}});
-        while(!q.empty()){
-            auto node=q.front().first;
-            long long int mini=q.front().second.first;
-            long long int maxi=q.front().second.second;
-            q.pop();
-            if(node->left){
-                if(node->left->val>=mini && node->left->val<=node->val){
-                    q.push({node->left,{mini,node->val}});
-                }else{
-                    return false;
-                }
-            }
-            if(node->right){
-                if(node->right->val>=node->val && node->right->val<=maxi){
-                    q.push({node->right,{node->val,maxi}});
-                }else{
-                    return false;
-                }
-            }
+        vector<int> in;
+        traverse(root,in);
+        for(int i=1;i<in.size();i++){
+            if(in[i]<=in[i-1]) return false;
         }
         return true;
     }
