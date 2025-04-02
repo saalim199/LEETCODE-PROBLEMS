@@ -11,22 +11,26 @@
  */
 class Solution {
 public:
-    TreeNode* construct(vector<int>& preorder, int ps, int pe, vector<int>& inorder, int is, int ie, map<int,int> &mp){
-        if(ps>pe || is>ie) return NULL;
-        TreeNode* root=new TreeNode(preorder[ps]);
-        int index=mp[root->val];
-        int shift=index-is;
-        root->left=construct(preorder,ps+1,ps+shift,inorder,is,index-1,mp);
-        root->right=construct(preorder,ps+shift+1,pe,inorder,index+1,ie,mp);
-        return root;
+    void construct(TreeNode* &root, vector<int> &preorder, vector<int> &inorder,
+    unordered_map<int,int> &inMap, int inStart, int inEnd, int preStart, int preEnd){
+        if(inStart>inEnd || preStart>preEnd) return;
+        TreeNode *node = new TreeNode();
+        int ele=preorder[preStart];           //1 3 2
+        int inIdx=inMap[ele];          //           s e
+        int n=inIdx-inStart; //1              //1 2 3
+        node->val=ele;                      //      s e
+        root=node;
+        construct(root->left,preorder,inorder,inMap,inStart,inIdx-1,preStart+1,preStart+n);
+        construct(root->right,preorder,inorder,inMap,inIdx+1,inEnd,preStart+n+1,preEnd);
     }
     TreeNode* bstFromPreorder(vector<int>& preorder) {
-        vector<int> inorder(preorder);
+        int n=preorder.size();
+        vector<int> inorder(preorder.begin(),preorder.end());
         sort(inorder.begin(),inorder.end());
-        map<int,int> mp;
-        for(int i=0;i<inorder.size();i++){
-            mp[inorder[i]]=i;
-        }
-        return construct(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1,mp);
+        unordered_map<int,int> inMap;
+        for(int i=0;i<inorder.size();i++) inMap[inorder[i]]=i;
+        TreeNode* root=new TreeNode();
+        construct(root,preorder,inorder,inMap,0,n-1,0,n-1);
+        return root;
     }
 };
