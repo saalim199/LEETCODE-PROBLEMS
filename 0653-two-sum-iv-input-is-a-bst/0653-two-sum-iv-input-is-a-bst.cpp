@@ -11,22 +11,16 @@
  */
 class Solution {
 public:
-    void trav(TreeNode* root, vector<int> &v){
-        if(!root) return;
-        trav(root->left,v);
-        v.push_back(root->val);
-        trav(root->right,v);
+    bool solve(TreeNode* root, int k, set<int> &s){
+        if(!root) return false;
+        if(s.find(k-root->val)!=s.end()){
+            return true;
+        }
+        s.insert(root->val);
+        return solve(root->left,k,s) || solve(root->right,k,s);
     }
     bool findTarget(TreeNode* root, int k) {
-        vector<int> v;
-        trav(root,v);
-        int i=0,j=v.size()-1;
-        while(i<j){
-            if(v[i]+v[j]==k) return true;
-            else if((v[i]+v[j])<k) i++;
-            else j--;
-        }
-        return false;
+        set<int> s;
+        return solve(root,k,s);
     }
 };
-
