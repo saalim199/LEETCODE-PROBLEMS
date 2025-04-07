@@ -1,26 +1,18 @@
 class Solution {
 public:
-    int solve(int i,int t,vector<int>&nums,vector<vector<int>>&dp){
-        if(t==0) return 1;
-        if(i==0){
-            if(nums[i]==t) return 1;
-            return 0;
-        }
-        if(dp[i][t]!=-1) return dp[i][t];
-        int nottaken=solve(i-1,t,nums,dp);
-        int taken=0;
-        if(nums[i]<t)
-            taken=solve(i-1,t-nums[i],nums,dp);
-        return dp[i][t]=(nottaken || taken);
+    bool solve(int i, vector<vector<int>> &dp, vector<int> &nums, int half){
+        if(i>=nums.size() || half<0) return false;
+        if(half==0) return true;
+        if(dp[i][half]!=-1) return dp[i][half];
+        bool taken=(i+1,dp,nums,half-nums[i]);
+        bool notTaken=(i+1,dp,nums,half);
+        return dp[i][half] = taken || notTaken;
     }
     bool canPartition(vector<int>& nums) {
-        int total=0;
-        for(int i=0;i<nums.size();i++){
-            total+=nums[i];
-        }
-        if(total%2!=0) return false;
-        vector<vector<int>> dp(nums.size(), vector<int>(total/2+1,-1));
-        return solve(nums.size()-1,total/2,nums,dp);
-
+        int total=accumulate(nums.begin(),nums.end(),0);
+        if(total&1) return false;
+        int half=total/2;
+        vector<vector<int>> dp(nums.size(),vector<int>(half+1,-1));
+        return solve(0,dp,nums,half);
     }
 };
