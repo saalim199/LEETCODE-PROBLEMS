@@ -1,22 +1,20 @@
 class Solution {
 public:
-    int solve(int i,int a,vector<int> &coins,vector<vector<int>>&dp){
-        if(i==0){
-            if(a%coins[0]==0) return a/coins[0];
+    int solve(int i, int amount, vector<int> &coins, vector<vector<int>> &dp){
+        if(i==coins.size()-1){
+            if(amount%coins[i]==0) return amount/coins[i];
             return 1e9;
         }
-        if(dp[i][a]!=-1) return dp[i][a];
-        int n=0+solve(i-1,a,coins,dp);
-        int t=1e9;
-        if(coins[i]<=a){
-            t=1+solve(i,a-coins[i],coins,dp);
-        }
-        return dp[i][a]=min(n,t);
+        if(dp[i][amount]!=-1) return dp[i][amount];
+        int taken=1e9;
+        if(coins[i]<=amount) taken=1+solve(i,amount-coins[i],coins,dp);
+        int notTaken=solve(i+1,amount,coins,dp);
+        return dp[i][amount]=min(taken,notTaken);
     }
     int coinChange(vector<int>& coins, int amount) {
         vector<vector<int>> dp(coins.size(),vector<int>(amount+1,-1));
-        int k= solve(coins.size()-1,amount,coins,dp);
-        if(k==1e9) return -1;
-        else return k;
+        int ans=solve(0,amount,coins,dp);
+        if(ans==1e9) return -1;
+        return ans;
     }
 };
