@@ -1,19 +1,31 @@
+struct Trie{
+    Trie* children[26];
+    int count=0;
+    void insert(string &str){
+        Trie* node=this;
+        for(auto &ch:str){
+            if(!node->children[ch-'a']){
+                node->children[ch-'a']=new Trie();
+            }
+            node=node->children[ch-'a'];
+            node->count++;
+        }
+    }
+};
+
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         string ans="";
-        for(int i=0;i<strs[0].size();i++){
-            char c=strs[0][i];
-            bool isCommon=true;
-            for(int j=1;j<strs.size();j++){
-                if(strs[j][i]!=c){
-                    isCommon=false;
-                    break;
-                }
-            }
-            if(isCommon){
-                ans+=c;
-            }else break;
+        Trie* root=new Trie();
+        int n=strs.size();
+        for(auto &s: strs){
+            root->insert(s);
+        }
+        for(auto &s : strs[0]){
+            root=root->children[s-'a'];
+            if(root->count==n) ans+=s;
+            else break;
         }
         return ans;
     }
