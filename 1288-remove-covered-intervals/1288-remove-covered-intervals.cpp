@@ -9,7 +9,6 @@ public:
         vector<int> curr = {intervals[0][0], intervals[0][1]};
         int count = 1;
         for(int i=1; i<intervals.size(); i++){
-            cout<<intervals[i][0]<<" "<<intervals[i][1]<<endl;
             if(intervals[i][0]>=curr[0] && intervals[i][1]<=curr[1]){
                 continue;
             }else{
