@@ -19,4 +19,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [2492-minimum-score-of-a-path-between-two-cities](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/2492-minimum-score-of-a-path-between-two-cities/) | Medium |
+## Array
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [1288-remove-covered-intervals](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/1288-remove-covered-intervals/) | Medium |
+## Sorting
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [1288-remove-covered-intervals](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/1288-remove-covered-intervals/) | Medium |
 <!---LeetCode Topics End-->
