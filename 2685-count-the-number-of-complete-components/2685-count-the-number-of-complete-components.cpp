@@ -13,26 +13,31 @@ public:
             if(vis[i]) continue;
             q.push(i);
             vis[i]=true;
-            vector<int> component;
+            // vector<int> component;
+            int m=0;
+            int cnt =0;
             while(!q.empty()){
                 int ele = q.front();
                 q.pop();
-                component.push_back(ele);
+                m++;
+                // component.push_back(ele);
                 for(auto &neigh : adj[ele]){
+                    cnt++;
                     if(!vis[neigh]){
                         q.push(neigh);
                         vis[neigh]=true;
                     }
                 }
             }
-            bool isComplete = true;
-            for(auto &node : component){
-                if(adj[node].size() != component.size()-1){
-                    isComplete = false;
-                    break;
-                }
-            }
-            if(isComplete) ans++;
+            // bool isComplete = true;
+            // for(auto &node : component){
+            //     if(adj[node].size() != component.size()-1){
+            //         isComplete = false;
+            //         break;
+            //     }
+            // }
+            // if(isComplete) ans++;
+            if((cnt/2) == ((m*(m-1))/2)) ans++;
         }
         return ans;
     }
