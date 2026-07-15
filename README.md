@@ -39,6 +39,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Math
 | Problem Name | Difficulty |
 | ------- | ------- |
+| [3658-gcd-of-odd-and-even-sums](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/3658-gcd-of-odd-and-even-sums/) | Easy |
 | [3754-concatenate-non-zero-digits-and-multiply-by-sum-i](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/3754-concatenate-non-zero-digits-and-multiply-by-sum-i/) | Easy |
 ## Hash Table
 | Problem Name | Difficulty |
@@ -49,4 +50,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | Problem Name | Difficulty |
 | ------- | ------- |
 | [3532-path-existence-queries-in-a-graph-i](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/3532-path-existence-queries-in-a-graph-i/) | Medium |
+## Number Theory
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [3658-gcd-of-odd-and-even-sums](https://github.com/saalim199/LEETCODE-PROBLEMS/tree/main/3658-gcd-of-odd-and-even-sums/) | Easy |
 <!---LeetCode Topics End-->
